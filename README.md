@@ -21,6 +21,7 @@ tags:
 ---
 # ESM-2 for Binding Site Prediction
 
+This model may be SOTA compared to [this SOTA model](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
 This model is a finetuned version of the 35M parameter `esm2_t12_35M_UR50D` ([see here](https://huggingface.co/facebook/esm2_t12_35M_UR50D) 
 and [here](https://huggingface.co/docs/transformers/model_doc/esm) for more details). The model was finetuned with LoRA for
 the binay token classification task of predicting binding sites (and active sites) of protein sequences based on sequence alone. 
