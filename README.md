@@ -45,7 +45,7 @@ structural models mentioned above, meaning the model may return some false posit
 
 ## Training procedure
 
-This model was finetuned on ~549K protein sequences from the UniProt database. The dataset can be found 
+This model was finetuned with LoRA on ~549K protein sequences from the UniProt database. The dataset can be found 
 [here](https://huggingface.co/datasets/AmelieSchreiber/binding_sites_random_split_by_family_550K). The model obtains 
 the following test metrics:
 
