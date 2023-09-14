@@ -21,6 +21,18 @@ tags:
 ---
 ## Training procedure
 
+```python
+Epoch: 3
+Training Loss: 0.029100
+Validation Loss: 0.291670
+Accuracy: 0.948626
+Precision: 0.409795
+Recall: 0.826979
+F1: 0.548025
+Auc: 0.890183
+Mcc: 0.560612
+```
+
 ### Framework versions
 
 
