@@ -21,7 +21,19 @@ tags:
 ---
 # ESM-2 for Binding Site Prediction
 
-This model may be SOTA compared to [this SOTA model](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
+This model *may be* SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
+One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
+for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
+is also an attempt to make deep learning techniques like LoRA more accessible and to showcase the competative or even superior performance 
+of simple models and techniques. Moreover, since most proteins still do not have a predicted 3D fold or backbone structure, it is useful to 
+have a model that can predict binding residues from sequence alone. We also hope that this project will be helpful in this regard. 
+It has been shown that pLMs like ESM-2 contain structural information in the attention maps that recapitulate the contact maps of proteins, 
+and that single sequence masked language models like ESMFold can be used in atomically accuracte predictions of folds, even outperforming 
+AlphaFold2 on proteins up to about 400 residues long. In our approach we show a positive correlation between scaling the model size and data 
+in a 1-to-1 fashion provides competative and possibly even SOTA performance, although our comparison to the SOTA models is not as fair and 
+comprehensive as it could be (see [this report for more details](https://api.wandb.ai/links/amelie-schreiber-math/0asqd3hs)). 
+
+
 This model is a finetuned version of the 35M parameter `esm2_t12_35M_UR50D` ([see here](https://huggingface.co/facebook/esm2_t12_35M_UR50D) 
 and [here](https://huggingface.co/docs/transformers/model_doc/esm) for more details). The model was finetuned with LoRA for
 the binay token classification task of predicting binding sites (and active sites) of protein sequences based on sequence alone. 
