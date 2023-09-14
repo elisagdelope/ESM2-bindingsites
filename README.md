@@ -70,6 +70,11 @@ Mcc: 0.560612
 To use the model on one of your protein sequences try running the following:
 
 ```python
+!pip install transformers -q 
+!pip install peft -q
+```
+
+```python
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 from peft import PeftModel
 import torch
