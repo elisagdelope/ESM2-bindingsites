@@ -21,7 +21,7 @@ tags:
 ---
 # ESM-2 for Binding Site Prediction
 
-**This model is overfit (see below).**
+**This model may be overfit to some extent (see below).**
 This model *may be* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
 Note the especially high recall below. 
 One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
