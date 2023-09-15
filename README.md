@@ -47,9 +47,10 @@ structural models mentioned above, meaning the model may return some false posit
 ## Running Inference
 
 You can download and run [this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_lora_binding_sites_v2_cp3/blob/main/testing_and_inference.ipynb) 
-to test out any of the ESMB models. Note, if you would like to run the models on the train/test split to get the metrics, you may need to do 
-locally or in a Colab Pro instance as the datasets are quite large and will not run in a standard Colab (you can still run inference on your own
-protein sequences though). 
+to test out any of the ESMB models. Be sure to download the datasets linked to in the notebook. 
+Note, if you would like to run the models on the train/test split to get the metrics, you may need to do 
+locally or in a Colab Pro instance as the datasets are quite large and will not run in a standard Colab 
+(you can still run inference on your own protein sequences though). 
 
 
 ## Training procedure
