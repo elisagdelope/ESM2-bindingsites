@@ -30,7 +30,7 @@ of simple models and techniques. Moreover, since most proteins still do not have
 have a model that can predict binding residues from sequence alone. We also hope that this project will be helpful in this regard. 
 It has been shown that pLMs like ESM-2 contain structural information in the attention maps that recapitulate the contact maps of proteins, 
 and that single sequence masked language models like ESMFold can be used in atomically accurate predictions of folds, even outperforming 
-AlphaFold2 on proteins up to about 400 residues long. In our approach we show a positive correlation between scaling the model size and data 
+AlphaFold2. In our approach we show a positive correlation between scaling the model size and data 
 in a 1-to-1 fashion provides competative and possibly even SOTA performance, although our comparison to the SOTA models is not as fair and 
 comprehensive as it could be (see [this report for more details](https://api.wandb.ai/links/amelie-schreiber-math/0asqd3hs)). 
 
