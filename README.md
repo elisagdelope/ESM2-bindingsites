@@ -21,6 +21,7 @@ tags:
 ---
 # ESM-2 for Binding Site Prediction
 
+**This model is overfit (see below)**
 This model *may be* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
 One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
 for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
@@ -42,6 +43,23 @@ precision, recall, F1 score, ROC_AUC, and Matthews Correlation Coefficient (MCC)
 dataset [found here](https://huggingface.co/datasets/AmelieSchreiber/binding_sites_random_split_by_family) of ~209K protein sequences. Note, 
 this model has a high recall, meaning it is likely to detect binding sites, but it has a precision score that is somewhat lower than the SOTA 
 structural models mentioned above, meaning the model may return some false positives as well. 
+
+## Overfitting Issues
+
+```python
+({'accuracy': 0.9908574638195745,
+  'precision': 0.7748830511095647,
+  'recall': 0.9862043939282111,
+  'f1': 0.8678649909611492,
+  'auc': 0.9886039823329382,
+  'mcc': 0.8699396085712834},
+ {'accuracy': 0.9486280975482552,
+  'precision': 0.40980984516603186,
+  'recall': 0.827004864790918,
+  'f1': 0.5480444772577421,
+  'auc': 0.890196425388581,
+  'mcc': 0.560633448203768})
+```
 
 
 ## Running Inference
