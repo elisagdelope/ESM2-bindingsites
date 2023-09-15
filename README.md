@@ -33,7 +33,8 @@ It has been shown that pLMs like ESM-2 contain structural information in the att
 and that single sequence masked language models like ESMFold can be used in atomically accurate predictions of folds, even outperforming 
 AlphaFold2. In our approach we show a positive correlation between scaling the model size and data 
 in a 1-to-1 fashion provides competative and possibly even SOTA performance, although our comparison to the SOTA models is not as fair and 
-comprehensive as it could be (see [this report for more details](https://api.wandb.ai/links/amelie-schreiber-math/0asqd3hs)). 
+comprehensive as it could be (see [this report for more details](https://api.wandb.ai/links/amelie-schreiber-math/0asqd3hs) and also 
+[this repost](https://wandb.ai/amelie-schreiber-math/huggingface/reports/ESM-2-Binding-Sites-Predictor-Part-3-Scaling-Results--Vmlldzo1NDA3Nzcy?accessToken=npsm0tatgumcidfwxubzjyuhal512xu8sjmpnf11sebktjm9mheg69ja397q57ok)). 
 
 
 This model is a finetuned version of the 35M parameter `esm2_t12_35M_UR50D` ([see here](https://huggingface.co/facebook/esm2_t12_35M_UR50D) 
