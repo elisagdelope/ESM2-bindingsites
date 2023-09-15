@@ -23,6 +23,7 @@ tags:
 
 **This model is overfit (see below).**
 This model *may be* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
+Note the especially high recall below. 
 One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
 for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
 is also an attempt to make deep learning techniques like LoRA more accessible and to showcase the competative or even superior performance 
