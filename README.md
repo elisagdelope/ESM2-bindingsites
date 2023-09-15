@@ -47,20 +47,70 @@ structural models mentioned above, meaning the model may return some false posit
 ## Overfitting Issues
 
 ```python
-({'accuracy': 0.9908574638195745,
+Train: ({'accuracy': 0.9908574638195745,
   'precision': 0.7748830511095647,
   'recall': 0.9862043939282111,
   'f1': 0.8678649909611492,
   'auc': 0.9886039823329382,
   'mcc': 0.8699396085712834},
- {'accuracy': 0.9486280975482552,
+Test: {'accuracy': 0.9486280975482552,
   'precision': 0.40980984516603186,
   'recall': 0.827004864790918,
   'f1': 0.5480444772577421,
   'auc': 0.890196425388581,
   'mcc': 0.560633448203768})
 ```
+Let's analyze the train and test metrics one by one:
 
+### **1. Accuracy**
+- **Train**: 99.09%
+- **Test**: 94.86%
+
+The accuracy is notably high in both training and test datasets, indicating that the model makes correct predictions a significant majority of the time. The high accuracy on the test dataset signifies good generalization capabilities.
+
+### **2. Precision**
+- **Train**: 77.49%
+- **Test**: 41.00%
+
+While the precision is quite good in the training dataset, it sees a decrease in the test dataset. This suggests that a substantial proportion of the instances that the model predicts as positive are actually negative, which could potentially lead to a higher false-positive rate.
+
+### **3. Recall**
+- **Train**: 98.62%
+- **Test**: 82.70%
+
+The recall is impressive in both the training and test datasets, indicating that the model is able to identify a large proportion of actual positive instances correctly. A high recall in the test dataset suggests that the model maintains its sensitivity in identifying positive cases when generalized to unseen data.
+
+### **4. F1-Score**
+- **Train**: 86.79%
+- **Test**: 54.80%
+
+The F1-score, which is the harmonic mean of precision and recall, is good in the training dataset but sees a decrease in the test dataset. The decrease in the F1-score from training to testing suggests a worsened balance between precision and recall in the unseen data, largely due to a decrease in precision.
+
+### **5. AUC (Area Under the ROC Curve)**
+- **Train**: 98.86%
+- **Test**: 89.02%
+
+The AUC is quite high in both the training and test datasets, indicating that the model has a good capability to distinguish between the positive and negative classes. A high AUC in the test dataset further suggests that the model generalizes well to unseen data.
+
+### **6. MCC (Matthews Correlation Coefficient)**
+- **Train**: 86.99%
+- **Test**: 56.06%
+
+The MCC, a balanced metric which takes into account true and false positives and negatives, is good in the training set but decreases in the test set. This suggests a diminished quality of binary classifications on the test dataset compared to the training dataset.
+
+### **Overall Analysis**
+
+- **Generalization**: The metrics reveal that the model has a good generalization capability, as indicated by the high accuracy, recall, and AUC on the test dataset.
+  
+- **Precision-Recall Trade-off**: The model maintains a high recall but experiences a dip in precision in the test dataset, leading to a lower F1-score. It indicates a tendency to predict more false positives, which might require tuning to balance precision and recall optimally.
+
+- **Improvement Suggestions**:
+  - **Precision Improvement**: Focus on strategies to improve precision, such as feature engineering or experimenting with different classification thresholds.
+  - **Hyperparameter Tuning**: Engaging in hyperparameter tuning might assist in enhancing the model's performance on unseen data.
+  - **Complexity Reduction**: Consider reducing the model's complexity to prevent potential overfitting and improve generalization.
+  - **Class Imbalance**: If the dataset has a class imbalance, techniques such as resampling or utilizing class weights might be beneficial.
+
+In conclusion, the model performs well on the training dataset and maintains a reasonably good performance on the test dataset, demonstrating a solid generalization capability. However, the decrease in certain metrics like precision and F1-score in the test dataset compared to the training dataset indicates room for improvement to optimize the model further for unseen data. It would be advantageous to enhance precision without significantly compromising recall to achieve a more harmonious balance between the two.
 
 ## Running Inference
 
