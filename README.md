@@ -22,20 +22,26 @@ tags:
 # ESM-2 for Binding Site Prediction
 
 **This model may be overfit to some extent (see below).**
+Try running [this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_lora_binding_sites_v2_cp3/blob/main/testing_esmb.ipynb) 
+on the datasets linked to in the notebook. See if you can figure out why the metrics differ so much on the datasets. Is it due to something 
+like sequence similarity in the train/test split? Is there something fundamentally flawed with the method? Splitting the sequences based on family 
+in UniProt seemed to help, but perhaps a more rigorous approach is necessary? 
 This model *may be* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
 Note the especially high recall below. 
+
 One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
 for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
 is also an attempt to make deep learning techniques like LoRA more accessible and to showcase the competative or even superior performance 
-of simple models and techniques. Moreover, since most proteins still do not have a predicted 3D fold or backbone structure, it is useful to 
+of simple models and techniques. This however may not be as viable as other methods. The model seems to show good performance, but 
+testing based on [this notebook]() seems to indicate otherwise. 
+
+Since most proteins still do not have a predicted 3D fold or backbone structure, it is useful to 
 have a model that can predict binding residues from sequence alone. We also hope that this project will be helpful in this regard. 
 It has been shown that pLMs like ESM-2 contain structural information in the attention maps that recapitulate the contact maps of proteins, 
 and that single sequence masked language models like ESMFold can be used in atomically accurate predictions of folds, even outperforming 
 AlphaFold2. In our approach we show a positive correlation between scaling the model size and data 
-in a 1-to-1 fashion provides competative and possibly even comparable to SOTA performance, although our comparison to the SOTA models is not as fair and 
-comprehensive as it could be (see [this report for more details](https://api.wandb.ai/links/amelie-schreiber-math/0asqd3hs) and also 
-[this report](https://wandb.ai/amelie-schreiber-math/huggingface/reports/ESM-2-Binding-Sites-Predictor-Part-3-Scaling-Results--Vmlldzo1NDA3Nzcy?accessToken=npsm0tatgumcidfwxubzjyuhal512xu8sjmpnf11sebktjm9mheg69ja397q57ok)). 
-
+in a 1-to-1 fashion provides what appears to be comparable to SOTA performance, although our comparison to the SOTA models is not fair and 
+comprehensive. Using the notebook linked above should help further evaluate the model, but initial findings seem pretty poor. 
 
 This model is a finetuned version of the 35M parameter `esm2_t12_35M_UR50D` ([see here](https://huggingface.co/facebook/esm2_t12_35M_UR50D) 
 and [here](https://huggingface.co/docs/transformers/model_doc/esm) for more details). The model was finetuned with LoRA for
@@ -68,37 +74,46 @@ Let's analyze the train and test metrics one by one:
 - **Train**: 99.09%
 - **Test**: 94.86%
 
-The accuracy is notably high in both training and test datasets, indicating that the model makes correct predictions a significant majority of the time. The high accuracy on the test dataset signifies good generalization capabilities.
+The accuracy is notably high in both training and test datasets, indicating that the model makes correct predictions a significant 
+majority of the time. The high accuracy on the test dataset signifies good generalization capabilities.
 
 ### **2. Precision**
 - **Train**: 77.49%
 - **Test**: 41.00%
 
-While the precision is quite good in the training dataset, it sees a decrease in the test dataset. This suggests that a substantial proportion of the instances that the model predicts as positive are actually negative, which could potentially lead to a higher false-positive rate.
+While the precision is quite good in the training dataset, it sees a decrease in the test dataset. This suggests that a substantial 
+proportion of the instances that the model predicts as positive are actually negative, which could potentially lead to a higher 
+false-positive rate.
 
 ### **3. Recall**
 - **Train**: 98.62%
 - **Test**: 82.70%
 
-The recall is impressive in both the training and test datasets, indicating that the model is able to identify a large proportion of actual positive instances correctly. A high recall in the test dataset suggests that the model maintains its sensitivity in identifying positive cases when generalized to unseen data.
+The recall is impressive in both the training and test datasets, indicating that the model is able to identify a large proportion of 
+actual positive instances correctly. A high recall in the test dataset suggests that the model maintains its sensitivity in identifying 
+positive cases when generalized to unseen data.
 
 ### **4. F1-Score**
 - **Train**: 86.79%
 - **Test**: 54.80%
 
-The F1-score, which is the harmonic mean of precision and recall, is good in the training dataset but sees a decrease in the test dataset. The decrease in the F1-score from training to testing suggests a worsened balance between precision and recall in the unseen data, largely due to a decrease in precision.
+The F1-score, which is the harmonic mean of precision and recall, is good in the training dataset but sees a decrease in the test dataset. 
+The decrease in the F1-score from training to testing suggests a worsened balance between precision and recall in the unseen data, 
+largely due to a decrease in precision.
 
 ### **5. AUC (Area Under the ROC Curve)**
 - **Train**: 98.86%
 - **Test**: 89.02%
 
-The AUC is quite high in both the training and test datasets, indicating that the model has a good capability to distinguish between the positive and negative classes. A high AUC in the test dataset further suggests that the model generalizes well to unseen data.
+The AUC is quite high in both the training and test datasets, indicating that the model has a good capability to distinguish 
+between the positive and negative classes. A high AUC in the test dataset further suggests that the model generalizes well to unseen data.
 
 ### **6. MCC (Matthews Correlation Coefficient)**
 - **Train**: 86.99%
 - **Test**: 56.06%
 
-The MCC, a balanced metric which takes into account true and false positives and negatives, is good in the training set but decreases in the test set. This suggests a diminished quality of binary classifications on the test dataset compared to the training dataset.
+The MCC, a balanced metric which takes into account true and false positives and negatives, is good in the training set but decreases 
+in the test set. This suggests a diminished quality of binary classifications on the test dataset compared to the training dataset.
 
 ### **Overall Analysis**
 
@@ -112,13 +127,16 @@ The MCC, a balanced metric which takes into account true and false positives and
   - **Complexity Reduction**: Consider reducing the model's complexity by training a LoRA for different weight matrices to prevent potential overfitting and improve generalization.
   - **Class Imbalance**: If the dataset has a class imbalance, techniques such as resampling or utilizing class weights might be beneficial.
 
-In conclusion, the model performs well on the training dataset and maintains a reasonably good performance on the test dataset, demonstrating a solid generalization capability. However, the decrease in certain metrics like precision and F1-score in the test dataset compared to the training dataset indicates room for improvement to optimize the model further for unseen data. It would be advantageous to enhance precision without significantly compromising recall to achieve a more harmonious balance between the two.
+So, the model performs well on the training dataset and maintains a reasonably good performance on the test dataset, 
+demonstrating a good generalization capability. However, the decrease in certain metrics like precision and F1-score in the test 
+dataset compared to the training dataset indicates room for improvement to optimize the model further for unseen data. It would be 
+advantageous to enhance precision without significantly compromising recall to achieve a more harmonious balance between the two.
 
 ## Running Inference
 
 You can download and run [this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_lora_binding_sites_v2_cp3/blob/main/testing_and_inference.ipynb) 
 to test out any of the ESMB models. Be sure to download the datasets linked to in the notebook. 
-Note, if you would like to run the models on the train/test split to get the metrics, you may need to do 
+Note, if you would like to run the models on the train/test split to get the metrics, you may need to do so
 locally or in a Colab Pro instance as the datasets are quite large and will not run in a standard Colab 
 (you can still run inference on your own protein sequences though). 
 
@@ -127,7 +145,7 @@ locally or in a Colab Pro instance as the datasets are quite large and will not 
 
 This model was finetuned with LoRA on ~549K protein sequences from the UniProt database. The dataset can be found 
 [here](https://huggingface.co/datasets/AmelieSchreiber/binding_sites_random_split_by_family_550K). The model obtains 
-the following test metrics:
+the following test metrics, also shown above:
 
 ```python
 Epoch: 3
