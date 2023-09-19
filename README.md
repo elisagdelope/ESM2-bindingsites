@@ -56,11 +56,9 @@ comprehensive. Using the notebook linked above should help further evaluate the 
 This model is a finetuned version of the 35M parameter `esm2_t12_35M_UR50D` ([see here](https://huggingface.co/facebook/esm2_t12_35M_UR50D) 
 and [here](https://huggingface.co/docs/transformers/model_doc/esm) for more details). The model was finetuned with LoRA for
 the binary token classification task of predicting binding sites (and active sites) of protein sequences based on sequence alone. 
-The model may need more training, however it still achieves better performance on the test set in terms of loss, accuracy, 
-precision, recall, F1 score, ROC_AUC, and Matthews Correlation Coefficient (MCC) compared to the models trained on the smaller 
-dataset [found here](https://huggingface.co/datasets/AmelieSchreiber/binding_sites_random_split_by_family) of ~209K protein sequences. Note, 
-this model has a high recall, meaning it is likely to detect binding sites, but it has a precision score that is somewhat lower than the SOTA 
-structural models mentioned above, meaning the model may return some false positives as well. 
+Note, this model has a high recall, meaning it is likely to detect binding sites, but it has a precision score that is somewhat lower than the SOTA 
+structural models mentioned above, meaning the model may return some false positives as well. This may be undesirable for various reasons, one 
+of which could be cost of lab experiments where a higher precision might be more desirable. 
 
 ## Overfitting Issues
 
