@@ -36,7 +36,14 @@ One of the primary goals in training this model is to prove the viability of usi
 for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
 is also an attempt to make deep learning techniques like LoRA more accessible and to showcase the competative or even superior performance 
 of simple models and techniques. This however may not be as viable as other methods. The model seems to show good performance, but 
-testing based on [this notebook]() seems to indicate otherwise. 
+testing based on [this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_lora_binding_sites_v2_cp3/blob/main/testing_esmb.ipynb) 
+seems to indicate otherwise. 
+
+The other potentially important finding is that Low Rank Adaptation (LoRA) helps dramatically improve overfitting of the models. We initially 
+finetuned without LoRA and found overfitting to be a serious issue. However, after using LoRA, we found the overfitting improved quite a lot 
+without any other modification. Due to the simplicity of LoRA, this may prove an important regularization technique for learning on proteins 
+in the future. Keep in mind though, this did not really solve the overfitting problem despite the improvements (the finetuned model wihtout LoRA
+was *very* overfit). 
 
 Since most proteins still do not have a predicted 3D fold or backbone structure, it is useful to 
 have a model that can predict binding residues from sequence alone. We also hope that this project will be helpful in this regard. 
