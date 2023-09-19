@@ -26,10 +26,13 @@ Try running [this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_
 on the datasets linked to in the notebook. See if you can figure out why the metrics differ so much on the datasets. Is it due to something 
 like sequence similarity in the train/test split? Is there something fundamentally flawed with the method? Splitting the sequences based on family 
 in UniProt seemed to help, but perhaps a more rigorous approach is necessary? 
-This model *may be* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
-Note the especially high recall below. 
 
-One of the primary goals in training this model is to prove the viability of using simple, single sequence only protein language models 
+This model *seems* close to SOTA compared to [these SOTA structural models](https://www.biorxiv.org/content/10.1101/2023.08.11.553028v1). 
+Note the especially high recall below based on the performance on the train/test split. However, initial testing on a couple of these datasets
+doesn't appear nearly as promising. If you would like to check the data preprocessing step, please see 
+[this notebook](https://huggingface.co/AmelieSchreiber/esm2_t12_35M_lora_binding_sites_v2_cp3/blob/main/data_preprocessing_notebook_v1.ipynb). 
+
+One of the primary goals in training this model is to prove the viability of using simple, single sequence only (no MSA) protein language models 
 for binary token classification tasks like predicting binding and active sites of protein sequences based on sequence alone. This project 
 is also an attempt to make deep learning techniques like LoRA more accessible and to showcase the competative or even superior performance 
 of simple models and techniques. This however may not be as viable as other methods. The model seems to show good performance, but 
