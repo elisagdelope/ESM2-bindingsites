@@ -1,6 +1,8 @@
 
 notebook*.log
 slurm*
+out
+err
 *.sbatch
 .venv
 jupyter_env
