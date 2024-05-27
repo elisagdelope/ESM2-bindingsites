@@ -4,6 +4,7 @@ slurm*
 *.sbatch
 .venv
 jupyter_env
+.ipynb_checkpoints
 wandb
 esm2_t*binding-sites_2024*
 requirements_initial.txt
